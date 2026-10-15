@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.parcial2.viewController.PaquetesViewController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Pane prefHeight="38.0" prefWidth="224.0">
+      <children>
+      
+          <!-- Botón para volver al menú principal -->
+          <Button fx:id="btnVolver" layoutY="-6.0" mnemonicParsing="false" text="&lt;- Regresar">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+      
+          <!-- Título de la vista -->
+          <Label layoutX="112.0" layoutY="6.0" text="Configuración de Paquetes Tecnológicos">
+              <font>
+                  <Font name="System Bold" size="18.0" />
+              </font>
+          </Label>
+      </children>
+   </Pane>
+
+    <!-- Nombre del Paquete -->
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <Label text="Nombre del Paquete:">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtNombrePaquete" HBox.hgrow="ALWAYS" />
+    </HBox>
+
+    <!-- Secciones de Selección (Dos listas) -->
+    <HBox spacing="15.0" VBox.vgrow="ALWAYS">
+        <!-- Izquierda: Elementos Disponibles (Servicios u otros Paquetes) -->
+        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+            <Label text="Catálogo de Elementos Disponibles :">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+            <ListView fx:id="listDisponibles" prefHeight="220.0" />
+        </VBox>
+
+        <!-- Centro: Botones de Asociación -->
+        <VBox alignment="CENTER" spacing="10.0">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" text="==&gt;" />
+            <Button fx:id="btnQuitar" mnemonicParsing="false" text="&lt;==" />
+        </VBox>
+
+        <!-- Derecha: Elementos Seleccionados para este Paquete -->
+        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+            <Label text="Componentes del Nuevo Paquete:">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+            <ListView fx:id="listSeleccionados" prefHeight="220.0" />
+        </VBox>
+    </HBox>
+
+    <!-- Panel inferior con Costo Total y Acciones -->
+    <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-border-color: #cccccc; -fx-padding: 10; -fx-background-color: #f9f9f9;">
+        <Label fx:id="lblCostoTotalPaquete" text="Costo Total del Paquete: $0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnCrearPaquete" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-base: #2175F1;" text="Guardar Paquete Tecnológico" />
+        </HBox>
+    </HBox>
+
+</VBox>

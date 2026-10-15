@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.parcial2.viewController.TecnicosViewController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Pane prefHeight="42.0" prefWidth="814.0">
+      <children>
+            <Label layoutX="284.0" layoutY="8.0" text="Consulta de Técnicos y Costos">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Button fx:id="btnVolver" layoutY="-6.0" mnemonicParsing="false" text="&lt;Regresar">
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Button>
+      </children>
+   </Pane>
+
+    <HBox spacing="20.0">
+        <!-- Izquierda: Consulta de Especialidad -->
+        <VBox spacing="12.0" HBox.hgrow="ALWAYS">
+            <Label text="Consultar Disponibilidad en Plataforma Externa:">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Label>
+
+            <HBox spacing="10.0">
+                <Label text="Especialidad:" />
+                <ComboBox fx:id="cmbEspecialidad" prefWidth="220.0" promptText="Seleccione especialidad..." />
+                <Button fx:id="btnConsultarTecnico" mnemonicParsing="false" text="Consultar LegacySupport" />
+            </HBox>
+
+            <VBox spacing="5.0" style="-fx-border-color: #cccccc; -fx-padding: 10; -fx-background-color: #fdfdfd;">
+                <Label text="Información Cruda / Respuesta del Proveedor Legacy:">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="txtRespuestaLegacy" editable="false" prefHeight="80.0" promptText="Ej. TEC-105|DISPONIBLE|30000" />
+            </VBox>
+        </VBox>
+
+        <!-- Derecha: Datos Estructurados y Desplazamiento -->
+        <VBox prefWidth="300.0" spacing="12.0">
+            <Label text="Datos Estructurados:">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Label>
+
+            <Label fx:id="lblIdTecnico" text="ID Técnico: No consultado" />
+            <Label fx:id="lblDisponibilidad" text="Disponibilidad: -" />
+            <Label fx:id="lblCostoDesplazamiento" text="Costo Desplazamiento: $0" />
+
+            <VBox spacing="5.0" style="-fx-border-color: #cccccc; -fx-padding: 10; -fx-background-color: #f9f9f9;">
+                <Label text="Validación de Presencialidad:" />
+                <Label fx:id="lblEstadoConfirmacion" text="Estado: Pendiente de validación" wrapText="true" />
+            </VBox>
+
+            <Button fx:id="btnVerificarYConfirmar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-base: #2175F1;" text="Verificar y Confirmar Solicitud" />
+        </VBox>
+    </HBox>
+
+</VBox>
