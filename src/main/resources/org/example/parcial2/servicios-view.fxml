@@ -63,7 +63,7 @@
                     <ComboBox fx:id="cmbTipoServicio" prefWidth="220.0" promptText="Seleccione tipo..." />
                 </HBox>
                 <HBox spacing="10.0">
-                    <TextField fx:id="txtCodigo" HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="txtCodigo" promptText="codgio" HBox.hgrow="ALWAYS" />
                     <Button fx:id="btnCrearServicio" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-base: #2175F1;" text="Crear Servicio" />
                 </HBox>
             </VBox>

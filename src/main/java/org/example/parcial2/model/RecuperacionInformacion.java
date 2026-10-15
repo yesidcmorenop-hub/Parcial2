@@ -1,7 +1,14 @@
 package org.example.parcial2.model;
 
 public class RecuperacionInformacion extends ServicioTecnologico{
-    public RecuperacionInformacion(int codigo, String nombre, String descripcion, double costoBase, Especialidad especialidad) {
-        super(codigo, nombre, descripcion, costoBase, especialidad);
+
+    public RecuperacionInformacion(int codigo) {
+        super(codigo,"Recuperacion de Informacion", "Recuperamos toda Información Perdida",
+               150000.0, Especialidad.RECUPERAR_INFORMACION);
+    }
+
+    @Override
+    public double calcularCosto() {
+        return this.costoBase;
     }
 }

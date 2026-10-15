@@ -1,4 +1,12 @@
 package org.example.parcial2.factory;
 
-public class FactoryMantenimientoCorrectivo {
+import org.example.parcial2.model.MantenimientoCorrectivo;
+import org.example.parcial2.model.ServicioTecnologico;
+
+public class FactoryMantenimientoCorrectivo extends FactoryServicioTecnologico {
+
+    @Override
+    public ServicioTecnologico crearServicio(int codigo) {
+        return new MantenimientoCorrectivo(codigo);
+    }
 }
