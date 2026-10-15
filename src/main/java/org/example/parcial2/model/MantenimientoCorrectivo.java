@@ -12,4 +12,9 @@ public class MantenimientoCorrectivo extends ServicioTecnologico{
     public double calcularCosto() {
         return this.costoBase;
     }
+
+    @Override
+    public double calcularCosto() {
+        return getCostoBase();
+    }
 }
