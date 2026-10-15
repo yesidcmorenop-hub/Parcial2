@@ -7,4 +7,9 @@ public class MantenimientoPreventivo extends ServicioTecnologico {
         super(codigo, nombre, descripcion, costoBase, especialidad);
     }
 
+    @Override
+    public double calcularCosto() {
+        return getCostoBase();
+    }
+
 }

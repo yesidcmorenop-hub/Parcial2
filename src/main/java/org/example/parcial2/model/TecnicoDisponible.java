@@ -1,21 +1,19 @@
 package org.example.parcial2.model;
 
 public class TecnicoDisponible {
-    private int idTecnico;
+    private String idTecnico;
     private boolean disponibilidad;
     private double costoDesplazamiento;
 
-    public TecnicoDisponible(int idTecnico, boolean disponibilidad, double costoDesplazamiento) {
+    public TecnicoDisponible(String idTecnico, boolean disponibilidad, double costoDesplazamiento) {
         this.idTecnico = idTecnico;
         this.disponibilidad = disponibilidad;
         this.costoDesplazamiento = costoDesplazamiento;
     }
 
-    public int getIdTecnico() {
-        return idTecnico;
-    }
+    public String getIdTecnico() { return idTecnico; }
 
-    public void setIdTecnico(int idTecnico) {
+    public void setIdTecnico(String idTecnico) {
         this.idTecnico = idTecnico;
     }
 

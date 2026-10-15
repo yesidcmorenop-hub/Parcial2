@@ -54,7 +54,6 @@ public abstract class ServicioTecnologico {
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
     }
-    public double calcularCosto(){
-        return 0;
-    }
+
+    public abstract double calcularCosto();
 }
