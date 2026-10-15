@@ -1,11 +1,11 @@
 package org.example.parcial2.model;
 
-public class ServicioTecnologico {
-    private int codigo;
-    private String nombre;
-    private String descripcion;
-    private double costoBase;
-    private Especialidad especialidad;
+public abstract class ServicioTecnologico {
+    protected int codigo;
+    protected String nombre;
+    protected String descripcion;
+    protected double costoBase;
+    protected Especialidad especialidad;
 
     public ServicioTecnologico(int codigo, String nombre, String descripcion, double costoBase, Especialidad especialidad) {
         this.codigo = codigo;
@@ -53,5 +53,8 @@ public class ServicioTecnologico {
 
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
+    }
+    public double calcularCosto(){
+        return 0;
     }
 }
