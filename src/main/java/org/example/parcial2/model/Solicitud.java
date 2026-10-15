@@ -4,87 +4,119 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Solicitud {
-    private int codigo;
+    private String codigo;
     private LocalDate fechaCreacion;
     private double costoTotal;
     private LocalDate fechaAtencion;
     private String observacion;
     private NivelPrioridad nivelPrioridad;
-    private ArrayList<ServicioTecnologico> listServicioTecnologico;
     private Cliente cliente;
+    private ArrayList<ServicioTecnologico> listServicioTecnologico;
 
-    public Solicitud(int codigo, LocalDate fechaCreacion, double costoTotal, LocalDate fechaAtencion, NivelPrioridad nivelPrioridad, String observacion, ArrayList<ServicioTecnologico> listServicioTecnologico, Cliente cliente) {
-        this.codigo = codigo;
-        this.fechaCreacion = fechaCreacion;
-        this.costoTotal = costoTotal;
-        this.fechaAtencion = fechaAtencion;
-        this.nivelPrioridad = nivelPrioridad;
-        this.observacion = observacion;
-        this.listServicioTecnologico = listServicioTecnologico;
-        this.cliente = cliente;
+
+    /**
+     * Constructor que permite crear solicitudes flexibles
+     */
+
+    private Solicitud(Builder builder) {
+        this.codigo = builder.codigo;
+        this.fechaCreacion = builder.fechaCreacion;
+        this.costoTotal = builder.costoTotal;
+        this.fechaAtencion = builder.fechaAtencion;
+        this.observacion = builder.observacion;
+        this.nivelPrioridad = builder.nivelPrioridad;
+        this.cliente = builder.cliente;
+        this.listServicioTecnologico = builder.listServicioTecnologico;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+    /**
+     * Getters y Setters
+     */
+    public String getCodigo() { return codigo; }
+    public void setCodigo(String codigo) { this.codigo = codigo; }
 
-    public LocalDate getFechaCreacion() {
-        return fechaCreacion;
-    }
+    public LocalDate getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(LocalDate fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
+    public double getCostoTotal() { return costoTotal; }
+    public void setCostoTotal(double costoTotal) { this.costoTotal = costoTotal; }
 
-    public double getCostoTotal() {
-        return costoTotal;
-    }
+    public LocalDate getFechaAtencion() { return fechaAtencion; }
+    public void setFechaAtencion(LocalDate fechaAtencion) { this.fechaAtencion = fechaAtencion; }
 
-    public void setCostoTotal(double costoTotal) {
-        this.costoTotal = costoTotal;
-    }
+    public String getObservacion() { return observacion; }
+    public void setObservacion(String observacion) { this.observacion = observacion; }
 
-    public LocalDate getFechaAtencion() {
-        return fechaAtencion;
-    }
+    public NivelPrioridad getNivelPrioridad() { return nivelPrioridad; }
+    public void setNivelPrioridad(NivelPrioridad nivelPrioridad) { this.nivelPrioridad = nivelPrioridad; }
 
-    public void setFechaAtencion(LocalDate fechaAtencion) {
-        this.fechaAtencion = fechaAtencion;
-    }
+    public ArrayList<ServicioTecnologico> getListServicioTecnologico() { return listServicioTecnologico; }
+    public void setListServicioTecnologico(ArrayList<ServicioTecnologico> listServicioTecnologico) { this.listServicioTecnologico = listServicioTecnologico; }
 
-    public String getObservacion() {
-        return observacion;
-    }
+    public Cliente getCliente() { return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
 
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
-    }
+    /**
+     * Clase Builder interna
+     */
 
-    public NivelPrioridad getNivelPrioridad() {
-        return nivelPrioridad;
-    }
+    public static class Builder {
+        private String codigo;
+        private LocalDate fechaCreacion;
+        private double costoTotal;
+        private LocalDate fechaAtencion;
+        private String observacion;
+        private NivelPrioridad nivelPrioridad;
+        private Cliente cliente;
+        private ArrayList<ServicioTecnologico> listServicioTecnologico;
 
-    public void setNivelPrioridad(NivelPrioridad nivelPrioridad) {
-        this.nivelPrioridad = nivelPrioridad;
-    }
+        public Builder codigo(String codigo) {
+            this.codigo = codigo;
+            return this;
+        }
 
-    public ArrayList<ServicioTecnologico> getListServicioTecnologico() {
-        return listServicioTecnologico;
-    }
+        public Builder fechaCreacion(LocalDate fechaCreacion) {
+            this.fechaCreacion = fechaCreacion;
+            return this;
+        }
 
-    public void setListServicioTecnologico(ArrayList<ServicioTecnologico> listServicioTecnologico) {
-        this.listServicioTecnologico = listServicioTecnologico;
-    }
+        public Builder costoTotal(double costoTotal) {
+            this.costoTotal = costoTotal;
+            return this;
+        }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+        public Builder fechaAtencion(LocalDate fechaAtencion) {
+            this.fechaAtencion = fechaAtencion;
+            return this;
+        }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+        public Builder observacion(String observacion) {
+            this.observacion = observacion;
+            return this;
+        }
+
+        public Builder nivelPrioridad(NivelPrioridad nivelPrioridad) {
+            this.nivelPrioridad = nivelPrioridad;
+            return this;
+        }
+
+        public Builder cliente(Cliente cliente) {
+            this.cliente = cliente;
+            return this;
+        }
+
+        public Builder listServicioTecnologico(ArrayList<ServicioTecnologico> listServicioTecnologico) {
+            this.listServicioTecnologico = listServicioTecnologico;
+            return this;
+        }
+
+        /**
+         * Metodo que construye el objeto final
+         */
+
+        public Solicitud build() {
+            return new Solicitud(this);
+        }
     }
 }
