@@ -1,5 +1,7 @@
 package org.example.parcial2.viewController;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,15 +34,23 @@ public class SolicitudesViewController implements Initializable {
     @FXML private Label lblCostoTotalSolicitud;
     @FXML private Button btnRegistrarSolicitud;
 
+    // Tabla de Historial
+    @FXML private TableView<Solicitud> tableSolicitudes;
+    @FXML private TableColumn<Solicitud, String> colCodigo;
+    @FXML private TableColumn<Solicitud, String> colCliente;
+    @FXML private TableColumn<Solicitud, LocalDate> colFecha;
+    @FXML private TableColumn<Solicitud, NivelPrioridad> colPrioridad;
+    @FXML private TableColumn<Solicitud, Double> colCostoTotal;
+
     private SolicitudController solicitudController;
     private final ObservableList<ServicioTecnologico> disponiblesObs = FXCollections.observableArrayList();
     private final ObservableList<ServicioTecnologico> seleccionadosObs = FXCollections.observableArrayList();
+    private final ObservableList<Solicitud> listaSolicitudesObs = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.solicitudController = new SolicitudController(Empresa.getInstance());
         if (solicitudController.obtenerClientes().isEmpty()) {
-
             Empresa.getInstance().getListCliente().add(new Cliente("Mariana", 123456, "mariana@techcorp.com"));
             Empresa.getInstance().getListCliente().add(new Cliente("Camilo", 112233, "camilo@techcorp.com"));
             Empresa.getInstance().getListCliente().add(new Cliente("Esteban", 122334, "esteban@techcorp.com"));
@@ -50,6 +60,8 @@ public class SolicitudesViewController implements Initializable {
         cmbPrioridad.setItems(FXCollections.observableArrayList(NivelPrioridad.values()));
 
         cargarCatalogo();
+        initTableBinding();
+        actualizarTablaSolicitudes();
 
         configurarCellFactory(listElementosDisponibles);
         configurarCellFactory(listElementosSeleccionados);
@@ -67,6 +79,19 @@ public class SolicitudesViewController implements Initializable {
         solicitudController.obtenerCatalogoServicios(catalogo);
         disponiblesObs.setAll(catalogo);
         listElementosDisponibles.setItems(disponiblesObs);
+    }
+
+    private void initTableBinding() {
+        colCodigo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCodigo()));
+        colCliente.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCliente().getNombre()));
+        colFecha.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getFechaAtencion()));
+        colPrioridad.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNivelPrioridad()));
+        colCostoTotal.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCostoTotal()));
+    }
+
+    private void actualizarTablaSolicitudes() {
+        listaSolicitudesObs.setAll(solicitudController.obtenerSolicitudesRegistradas());
+        tableSolicitudes.setItems(listaSolicitudesObs);
     }
 
     private void configurarCellFactory(ListView<ServicioTecnologico> listView) {
@@ -110,7 +135,7 @@ public class SolicitudesViewController implements Initializable {
         for (ServicioTecnologico s : seleccionadosObs) {
             total += s.calcularCosto();
         }
-        lblCostoTotalSolicitud.setText("$" + total);
+        lblCostoTotalSolicitud.setText("Costo Total: $" + total);
     }
 
     @FXML
@@ -127,10 +152,25 @@ public class SolicitudesViewController implements Initializable {
             );
 
             mostrarInformacion(resultado);
-            cerrarVentana();
+
+            // Actualizar tabla, limpiar formulario y mantener la ventana abierta
+            actualizarTablaSolicitudes();
+            limpiarFormulario();
+
         } catch (Exception e) {
             mostrarError("Error al registrar la solicitud. Verifique los campos obligatorios.");
         }
+    }
+
+    private void limpiarFormulario() {
+        txtCodigoSolicitud.clear();
+        cmbClientes.getSelectionModel().clearSelection();
+        cmbPrioridad.getSelectionModel().clearSelection();
+        dateProgramada.setValue(null);
+        txtObservaciones.clear();
+        seleccionadosObs.clear();
+        cargarCatalogo(); // Devuelve los elementos seleccionados al catálogo disponible
+        lblCostoTotalSolicitud.setText("Costo Total: $0");
     }
 
     private void cerrarVentana() {

@@ -12,7 +12,7 @@
     </padding>
 
     <!-- Título Principal -->
-    <Label text="TechSolutions - Sistema de Gestión">
+    <Label text="TechSolutions">
         <font>
             <Font name="System Bold" size="22.0" />
         </font>

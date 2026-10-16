@@ -12,9 +12,6 @@ public class ServicioController {
         this.empresa = empresa;
     }
 
-    /**
-     * Registra un nuevo servicio utilizando los constructores / fábricas del modelo.
-     */
     public String crearServicio(String tipo, int codigo, String nombre, String descripcion) {
         ServicioTecnologico nuevoServicio = null;
 
@@ -35,9 +32,6 @@ public class ServicioController {
         return "No se pudo determinar el tipo de servicio.";
     }
 
-    /**
-     * Aplica el patrón Decorator según las características seleccionadas.
-     */
     public ServicioTecnologico aplicarDecoradores(ServicioTecnologico servicioBase, boolean prioritaria, boolean soporte, boolean domicilio) {
         ServicioTecnologico servicioResultado = servicioBase;
 
@@ -54,23 +48,15 @@ public class ServicioController {
         return servicioResultado;
     }
 
-    /**
-     * Obtiene la lista completa de servicios del catálogo.
-     */
     public ArrayList<ServicioTecnologico> obtenerCatalogoServicios() {
         ArrayList<ServicioTecnologico> catalogo = new ArrayList<>();
         empresa.obtenerCatalogoServicios(catalogo);
         return catalogo;
     }
 
-    /**
-     * Registra un servicio personalizado (decorado) en el catálogo general de la empresa.
-     */
     public void registrarServicioPersonalizado(ServicioTecnologico servicioPersonalizado) {
         if (servicioPersonalizado != null) {
             empresa.registrarServicio(servicioPersonalizado);
         }
     }
 }
-
-

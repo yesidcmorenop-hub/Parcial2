@@ -5,6 +5,7 @@ import org.example.parcial2.model.Especialidad;
 import org.example.parcial2.model.PaqueteTecnologico;
 import org.example.parcial2.model.ServicioTecnologico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaqueteController {
@@ -27,7 +28,19 @@ public class PaqueteController {
             return "Debe seleccionar al menos un elemento para configurar el paquete tecnológico.";
         }
 
-        // Instanciamos el Paquete (Patrón Composite)
+        // Validar que no exista un servicio o paquete con el mismo nombre o código en la empresa
+        List<ServicioTecnologico> catalogoActual = new ArrayList<>();
+        empresa.obtenerCatalogoServicios(catalogoActual);
+
+        for (ServicioTecnologico s : catalogoActual) {
+            if (s.getCodigo() == codigo) {
+                return "Error: Ya existe un elemento registrado con el código " + codigo + ".";
+            }
+            if (s.getNombre().equalsIgnoreCase(nombre.trim())) {
+                return "Error: Ya existe un paquete o servicio con el nombre '" + nombre + "'.";
+            }
+        }
+
         PaqueteTecnologico nuevoPaquete = new PaqueteTecnologico(
                 codigo,
                 nombre,
@@ -43,7 +56,6 @@ public class PaqueteController {
             }
         }
 
-        // Se registra en el catálogo general de la empresa como un servicio compuesto más
         empresa.registrarServicio(nuevoPaquete);
         return "Paquete tecnológico creado y registrado exitosamente.";
     }

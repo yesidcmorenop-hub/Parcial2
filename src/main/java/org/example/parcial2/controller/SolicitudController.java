@@ -22,6 +22,10 @@ public class SolicitudController {
         empresa.obtenerCatalogoServicios(destino);
     }
 
+    public List<Solicitud> obtenerSolicitudesRegistradas() {
+        return empresa.getListSolicitud(); // Asegúrate de que Empresa tenga este método o lista
+    }
+
     public String registrarSolicitud(String codigo, Cliente cliente, List<ServicioTecnologico> servicios,
                                      LocalDate fechaAtencion, NivelPrioridad prioridad, String observaciones) {
         if (codigo == null || codigo.trim().isEmpty()) {

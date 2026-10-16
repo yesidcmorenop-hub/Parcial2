@@ -16,6 +16,8 @@ public class TecnicoController {
         if (especialidad == null) {
             return null;
         }
-        return empresa.validarDisponibilidad(especialidad);
+        TecnicoDisponible tecnico = empresa.validarDisponibilidad(especialidad);
+
+        return tecnico;
     }
 }

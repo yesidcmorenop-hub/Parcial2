@@ -6,6 +6,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
@@ -19,7 +21,7 @@
     </padding>
     <Pane prefHeight="44.0" prefWidth="588.0">
         <children>
-            <Button fx:id="btnVolver" layoutY="-3.0" mnemonicParsing="false" text="&lt;Regresar">
+            <Button fx:id="btnVolver" layoutY="-4.0" mnemonicParsing="false" text="&lt;- Regresar">
                 <font>
                     <Font name="System Bold" size="12.0" />
                 </font>
@@ -34,11 +36,11 @@
 
     <HBox spacing="20.0">
         <VBox spacing="10.0" HBox.hgrow="ALWAYS">
-            <TextField fx:id="txtCodigoSolicitud" promptText="Código Solicitud (Obligatorio)" />
+            <TextField fx:id="txtCodigoSolicitud" promptText="Codigo de solicitud" />
 
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                 <Label text="Cliente:" />
-                <ComboBox fx:id="cmbClientes" prefWidth="250.0" promptText="Seleccione cliente" />
+                <ComboBox fx:id="cmbClientes" prefWidth="250.0" />
             </HBox>
 
             <Label text="Elementos Disponibles (Catálogo):">
@@ -46,18 +48,18 @@
                     <Font name="System Bold" size="12.0" />
                 </font>
             </Label>
-            <ListView fx:id="listElementosDisponibles" prefHeight="110.0" />
+            <ListView fx:id="listElementosDisponibles" prefHeight="90.0" />
 
-            <Button fx:id="btnAgregarElementoSolicitud" mnemonicParsing="false" text="⬇️ Agregar a la Solicitud" />
+            <Button fx:id="btnAgregarElementoSolicitud" mnemonicParsing="false" text="Agregar a la Solicitud" />
 
             <Label text="Elementos Seleccionados para la Solicitud:">
                 <font>
                     <Font name="System Bold" size="12.0" />
                 </font>
             </Label>
-            <ListView fx:id="listElementosSeleccionados" prefHeight="110.0" />
+            <ListView fx:id="listElementosSeleccionados" prefHeight="90.0" />
 
-            <Button fx:id="btnQuitarElementoSolicitud" mnemonicParsing="false" text="⬆️ Quitar de la Solicitud" />
+            <Button fx:id="btnQuitarElementoSolicitud" mnemonicParsing="false" text="Quitar de la Solicitud" />
         </VBox>
 
         <VBox prefWidth="300.0" spacing="10.0">
@@ -71,12 +73,12 @@
             <DatePicker fx:id="dateProgramada" prefWidth="300.0" />
 
             <Label text="Nivel de Prioridad:" />
-            <ComboBox fx:id="cmbPrioridad" prefWidth="300.0" promptText="Seleccione prioridad..." />
+            <ComboBox fx:id="cmbPrioridad" prefWidth="300.0" />
 
             <Label text="Observaciones Técnicas:" />
-            <TextArea fx:id="txtObservaciones" prefHeight="70.0" promptText="Detalles adicionales opcionales..." />
+            <TextArea fx:id="txtObservaciones" prefHeight="50.0" promptText="Detalles adicionales opcionales..." />
 
-            <VBox spacing="5.0" style="-fx-border-color: #cccccc; -fx-padding: 10; -fx-background-color: #f9f9f9;">
+            <VBox spacing="5.0" style="-fx-border-color: #cccccc; -fx-padding: 8; -fx-background-color: #f9f9f9;">
                 <Label fx:id="lblCostoTotalSolicitud" text="Costo Total: $0">
                     <font>
                         <Font name="System Bold" size="13.0" />
@@ -87,5 +89,23 @@
             <Button fx:id="btnRegistrarSolicitud" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-base: #2175F1;" text="Registrar Solicitud" />
         </VBox>
     </HBox>
+
+    <!-- HISTORIAL DE SOLICITUDES -->
+    <VBox prefHeight="175.0" prefWidth="519.0" spacing="5.0" VBox.vgrow="ALWAYS">
+        <Label text="Historial de Solicitudes Registradas:">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableSolicitudes" prefHeight="150.0">
+            <columns>
+                <TableColumn fx:id="colCodigo" prefWidth="90.0" text="Código" />
+                <TableColumn fx:id="colCliente" prefWidth="150.0" text="Cliente" />
+                <TableColumn fx:id="colFecha" prefWidth="120.0" text="Fecha Programada" />
+                <TableColumn fx:id="colPrioridad" prefWidth="110.0" text="Prioridad" />
+                <TableColumn fx:id="colCostoTotal" prefWidth="130.0" text="Costo Total" />
+            </columns>
+        </TableView>
+    </VBox>
 
 </VBox>

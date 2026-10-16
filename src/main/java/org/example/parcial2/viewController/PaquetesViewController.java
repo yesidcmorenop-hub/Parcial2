@@ -106,10 +106,22 @@ public class PaquetesViewController implements Initializable {
 
             String resultado = paqueteController.crearPaqueteTecnologico(codigoGenerado, nombre, new ArrayList<>(listaSeleccionadosObs));
             mostrarInformacion(resultado);
-            cerrarVentana();
+
+            // Si la creación fue exitosa, actualizamos la lista disponible y limpiamos la interfaz sin cerrar la ventana
+            if (!resultado.contains("Error")) {
+                cargarCatalogoDisponibles();
+                limpiarFormulario();
+            }
         } catch (Exception e) {
             mostrarError("Verifique los datos ingresados para el paquete.");
         }
+    }
+
+    private void limpiarFormulario() {
+        txtNombrePaquete.clear();
+        listaSeleccionadosObs.clear();
+        listSeleccionados.setItems(listaSeleccionadosObs);
+        lblCostoTotalPaquete.setText("$0.0");
     }
 
     private void cerrarVentana() {

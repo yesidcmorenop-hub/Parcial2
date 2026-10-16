@@ -51,10 +51,8 @@ public class ServiciosViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 1. Instanciar el controlador de negocio conectado con el Singleton de la Empresa
         this.servicioController = new ServicioController(Empresa.getInstance());
 
-        // 2. Inicializar ComboBox y BINDING de columnas
         cmbTipoServicio.getItems().addAll(
                 "Mantenimiento Preventivo",
                 "Mantenimiento Correctivo",
@@ -66,7 +64,6 @@ public class ServiciosViewController implements Initializable {
         listenerSelection();
         actualizarTabla();
 
-        // Listeners para checkboxes
         chkAtencionPrioritaria.setOnAction(e -> recalcularCostosUI());
         chkSoporte30Dias.setOnAction(e -> recalcularCostosUI());
         chkAtencionDomicilio.setOnAction(e -> recalcularCostosUI());
@@ -79,7 +76,8 @@ public class ServiciosViewController implements Initializable {
     private void initDataBinding() {
         colCodigo.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCodigo()).asObject());
         colNombre.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNombre()));
-        colCostoBase.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getCostoBase()));
+        // AQUÍ ESTÁ LA CLAVE: Mostramos el costo total calculado (Base + Complementos) en la tabla
+        colCostoBase.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().calcularCosto()));
         colTipo.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getEspecialidad()));
     }
 
@@ -102,7 +100,6 @@ public class ServiciosViewController implements Initializable {
         double base = servicioSeleccionado.getCostoBase();
         lblCostoBase.setText("$" + base);
 
-        // Decoramos a través del controller de negocio
         ServicioTecnologico decorado = servicioController.aplicarDecoradores(
                 servicioSeleccionado,
                 chkAtencionPrioritaria.isSelected(),
@@ -143,7 +140,6 @@ public class ServiciosViewController implements Initializable {
     @FXML
     private void handleAplicarComplementos(ActionEvent event) {
         if (servicioSeleccionado != null) {
-            // Obtenemos el servicio decorado con los complementos seleccionados actualmente
             ServicioTecnologico servicioDecorado = servicioController.aplicarDecoradores(
                     servicioSeleccionado,
                     chkAtencionPrioritaria.isSelected(),
@@ -155,6 +151,11 @@ public class ServiciosViewController implements Initializable {
             actualizarTabla();
 
             mostrarInformacion("¡Servicio personalizado creado con éxito! Costo final: $" + servicioDecorado.calcularCosto() + ". Ya está disponible en el registro de solicitudes.");
+
+            // Limpiar selección de complementos y mantener la ventana abierta
+            chkAtencionPrioritaria.setSelected(false);
+            chkSoporte30Dias.setSelected(false);
+            chkAtencionDomicilio.setSelected(false);
         } else {
             mostrarError("Seleccione un servicio de la tabla.");
         }

@@ -40,7 +40,7 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Label>
-        <TextField fx:id="txtNombrePaquete" HBox.hgrow="ALWAYS" />
+        <TextField fx:id="txtNombrePaquete" prefHeight="26.0" prefWidth="315.0" HBox.hgrow="ALWAYS" />
     </HBox>
 
     <!-- Secciones de Selección (Dos listas) -->
@@ -57,8 +57,14 @@
 
         <!-- Centro: Botones de Asociación -->
         <VBox alignment="CENTER" spacing="10.0">
-            <Button fx:id="btnAgregar" mnemonicParsing="false" text="==&gt;" />
-            <Button fx:id="btnQuitar" mnemonicParsing="false" text="&lt;==" />
+            <Button fx:id="btnAgregar" mnemonicParsing="false" style="-fx-font-weight: bold;" text="==&gt;">
+            <font>
+               <Font size="14.0" />
+            </font></Button>
+            <Button fx:id="btnQuitar" mnemonicParsing="false" style="-fx-font-weight: bold;" text="&lt;==">
+            <font>
+               <Font size="14.0" />
+            </font></Button>
         </VBox>
 
         <!-- Derecha: Elementos Seleccionados para este Paquete -->
