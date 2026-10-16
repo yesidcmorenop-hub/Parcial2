@@ -7,6 +7,14 @@ public abstract class ServicioTecnologico {
     protected double costoBase;
     protected Especialidad especialidad;
 
+    /**
+     * metodo constructor del servicio tecnologiico
+     * @param codigo de paquete
+     * @param nombre de paquete
+     * @param descripcion de paquete
+     * @param costoBase de paquete
+     * @param especialidad de paquete
+     */
     public ServicioTecnologico(int codigo, String nombre, String descripcion, double costoBase, Especialidad especialidad) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -55,5 +63,9 @@ public abstract class ServicioTecnologico {
         this.especialidad = especialidad;
     }
 
+    /**
+     * metodo para calcular el costo de cada servicio
+     * @return
+     */
     public abstract double calcularCosto();
 }

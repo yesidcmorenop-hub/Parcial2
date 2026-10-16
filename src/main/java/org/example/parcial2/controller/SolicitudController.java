@@ -23,7 +23,7 @@ public class SolicitudController {
     }
 
     public List<Solicitud> obtenerSolicitudesRegistradas() {
-        return empresa.getListSolicitud(); // Asegúrate de que Empresa tenga este método o lista
+        return empresa.getListSolicitud();
     }
 
     public String registrarSolicitud(String codigo, Cliente cliente, List<ServicioTecnologico> servicios,

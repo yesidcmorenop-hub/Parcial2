@@ -31,6 +31,17 @@ public class PaquetesViewController implements Initializable {
     private final ObservableList<ServicioTecnologico> listaDisponiblesObs = FXCollections.observableArrayList();
     private final ObservableList<ServicioTecnologico> listaSeleccionadosObs = FXCollections.observableArrayList();
 
+
+    /**
+     * metodo que inicia los metodos
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.paqueteController = new PaqueteController(Empresa.getInstance());
@@ -43,13 +54,15 @@ public class PaquetesViewController implements Initializable {
         btnVolver.setOnAction(event -> cerrarVentana());
     }
 
+    /**
+     * metodo que carga el catalogo de los servicios
+     */
     private void cargarCatalogoDisponibles() {
         List<ServicioTecnologico> catalogo = new ArrayList<>();
         paqueteController.obtenerCatalogo(catalogo);
         listaDisponiblesObs.setAll(catalogo);
         listDisponibles.setItems(listaDisponiblesObs);
 
-        // Personalizamos cómo se ven los objetos en las listas gráficas
         configurarCellFactory(listDisponibles);
         configurarCellFactory(listSeleccionados);
     }
@@ -68,6 +81,10 @@ public class PaquetesViewController implements Initializable {
         });
     }
 
+    /**
+     * permite agregar los elementos al paquete
+     * @param event
+     */
     @FXML
     private void handleAgregarElemento(ActionEvent event) {
         ServicioTecnologico seleccionado = listDisponibles.getSelectionModel().getSelectedItem();
@@ -78,6 +95,11 @@ public class PaquetesViewController implements Initializable {
             recalcularCostoVisual();
         }
     }
+
+    /**
+     * metodo que permite quitar el elmento del paquete
+     * @param event
+     */
 
     @FXML
     private void handleQuitarElemento(ActionEvent event) {
@@ -90,6 +112,9 @@ public class PaquetesViewController implements Initializable {
         }
     }
 
+    /**
+     * calcula el costo total
+     */
     private void recalcularCostoVisual() {
         double total = 0.0;
         for (ServicioTecnologico s : listaSeleccionadosObs) {
@@ -98,6 +123,10 @@ public class PaquetesViewController implements Initializable {
         lblCostoTotalPaquete.setText("$" + total);
     }
 
+    /**
+     * permite crear el paquete
+     * @param event
+     */
     @FXML
     private void handleCrearPaquete(ActionEvent event) {
         try {
@@ -107,7 +136,7 @@ public class PaquetesViewController implements Initializable {
             String resultado = paqueteController.crearPaqueteTecnologico(codigoGenerado, nombre, new ArrayList<>(listaSeleccionadosObs));
             mostrarInformacion(resultado);
 
-            // Si la creación fue exitosa, actualizamos la lista disponible y limpiamos la interfaz sin cerrar la ventana
+
             if (!resultado.contains("Error")) {
                 cargarCatalogoDisponibles();
                 limpiarFormulario();
@@ -117,6 +146,9 @@ public class PaquetesViewController implements Initializable {
         }
     }
 
+    /**
+     * elimina los espacios seleccionados
+     */
     private void limpiarFormulario() {
         txtNombrePaquete.clear();
         listaSeleccionadosObs.clear();
@@ -124,11 +156,18 @@ public class PaquetesViewController implements Initializable {
         lblCostoTotalPaquete.setText("$0.0");
     }
 
+    /**
+     * permite cerrar la ventana y volver al menu
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * muestra los mensajes despues de hacer algo
+     * @param mensaje
+     */
     private void mostrarInformacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TechSolutions");
@@ -137,6 +176,10 @@ public class PaquetesViewController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * mustra los errores
+     * @param mensaje
+     */
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("TechSolutions");

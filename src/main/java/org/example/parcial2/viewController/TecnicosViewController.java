@@ -41,11 +41,21 @@ public class TecnicosViewController implements Initializable {
     private TecnicoDisponible tecnicoActual;
     private final ObservableList<ConsultaTecnicoRecord> listaHistorialObs = FXCollections.observableArrayList();
 
+
+    /**
+     * metodo que inicia los procesos
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.tecnicoController = new TecnicoController(Empresa.getInstance());
 
-        // Cargamos las especialidades definidas en el modelo
         cmbEspecialidad.getItems().setAll(Especialidad.values());
 
         initTableBinding();
@@ -64,6 +74,10 @@ public class TecnicosViewController implements Initializable {
         tableTecnicos.setItems(listaHistorialObs);
     }
 
+    /**
+     * permite consultar la informacion del t4ecnico
+     * @param event
+     */
     @FXML
     private void handleConsultarLegacy(ActionEvent event) {
         Especialidad especialidadSeleccionada = cmbEspecialidad.getValue();
@@ -72,8 +86,6 @@ public class TecnicosViewController implements Initializable {
             txtRespuestaLegacy.setText("Por favor, seleccione una especialidad primero.");
             return;
         }
-
-        // Consultamos a través del controlador de negocio (Adapter integrado)
         tecnicoActual = tecnicoController.consultarDisponibilidadTecnico(especialidadSeleccionada);
 
         if (tecnicoActual != null) {
@@ -88,7 +100,6 @@ public class TecnicosViewController implements Initializable {
             lblDisponibilidad.setText("Disponibilidad: " + estadoDisp);
             lblCostoDesplazamiento.setText("Costo Desplazamiento: $" + tecnicoActual.getCostoDesplazamiento());
 
-            // Agregar el registro a la tabla de historial en tiempo real
             ConsultaTecnicoRecord record = new ConsultaTecnicoRecord(
                     especialidadSeleccionada.toString(),
                     tecnicoActual.getIdTecnico(),
@@ -102,6 +113,10 @@ public class TecnicosViewController implements Initializable {
         }
     }
 
+    /**
+     * permite verificar si el tecnico esta disponible
+     * @param event
+     */
     @FXML
     private void handleVerificarYConfirmar(ActionEvent event) {
         if (tecnicoActual != null && tecnicoActual.isDisponibilidad()) {
@@ -111,6 +126,9 @@ public class TecnicosViewController implements Initializable {
         }
     }
 
+    /**
+     * permite cerrar la ventana y volver al menu
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         stage.close();

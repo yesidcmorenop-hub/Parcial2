@@ -47,6 +47,17 @@ public class SolicitudesViewController implements Initializable {
     private final ObservableList<ServicioTecnologico> seleccionadosObs = FXCollections.observableArrayList();
     private final ObservableList<Solicitud> listaSolicitudesObs = FXCollections.observableArrayList();
 
+
+    /**
+     * metodo que inicia los procesos
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.solicitudController = new SolicitudController(Empresa.getInstance());
@@ -74,6 +85,9 @@ public class SolicitudesViewController implements Initializable {
         btnRegistrarSolicitud.setOnAction(this::handleRegistrarSolicitud);
     }
 
+    /**
+     * carga los servicios disponibles
+     */
     private void cargarCatalogo() {
         List<ServicioTecnologico> catalogo = new ArrayList<>();
         solicitudController.obtenerCatalogoServicios(catalogo);
@@ -108,6 +122,10 @@ public class SolicitudesViewController implements Initializable {
         });
     }
 
+    /**
+     * permite agregar los elementos a las solicitudes
+     * @param event
+     */
     @FXML
     private void handleAgregarElemento(ActionEvent event) {
         ServicioTecnologico seleccionado = listElementosDisponibles.getSelectionModel().getSelectedItem();
@@ -119,6 +137,10 @@ public class SolicitudesViewController implements Initializable {
         }
     }
 
+    /**
+     * permite quitar los elementos de las solicitudes
+     * @param event
+     */
     @FXML
     private void handleQuitarElemento(ActionEvent event) {
         ServicioTecnologico seleccionado = listElementosSeleccionados.getSelectionModel().getSelectedItem();
@@ -130,6 +152,9 @@ public class SolicitudesViewController implements Initializable {
         }
     }
 
+    /**
+     * permite calcular el costo total
+     */
     private void recalcularCostoTotal() {
         double total = 0.0;
         for (ServicioTecnologico s : seleccionadosObs) {
@@ -138,6 +163,10 @@ public class SolicitudesViewController implements Initializable {
         lblCostoTotalSolicitud.setText("Costo Total: $" + total);
     }
 
+    /**
+     * permite registrar las solicitudes
+     * @param event
+     */
     @FXML
     private void handleRegistrarSolicitud(ActionEvent event) {
         try {
@@ -152,8 +181,6 @@ public class SolicitudesViewController implements Initializable {
             );
 
             mostrarInformacion(resultado);
-
-            // Actualizar tabla, limpiar formulario y mantener la ventana abierta
             actualizarTablaSolicitudes();
             limpiarFormulario();
 
@@ -162,6 +189,9 @@ public class SolicitudesViewController implements Initializable {
         }
     }
 
+    /**
+     * elimina los espacios seleccionados
+     */
     private void limpiarFormulario() {
         txtCodigoSolicitud.clear();
         cmbClientes.getSelectionModel().clearSelection();
@@ -173,11 +203,18 @@ public class SolicitudesViewController implements Initializable {
         lblCostoTotalSolicitud.setText("Costo Total: $0");
     }
 
+    /**
+     * permite cerrar la ventana y volver al menu
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * muestra los mensajes despues de hacer algo
+     * @param mensaje
+     */
     private void mostrarInformacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TechSolutions");
@@ -186,6 +223,10 @@ public class SolicitudesViewController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * mustra los errores
+     * @param mensaje
+     */
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("TechSolutions");

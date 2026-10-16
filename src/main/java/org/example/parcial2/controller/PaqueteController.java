@@ -28,7 +28,10 @@ public class PaqueteController {
             return "Debe seleccionar al menos un elemento para configurar el paquete tecnológico.";
         }
 
-        // Validar que no exista un servicio o paquete con el mismo nombre o código en la empresa
+        /**
+         * Validar que no exista un servicio o paquete con el mismo nombre o código en la empresa
+         */
+
         List<ServicioTecnologico> catalogoActual = new ArrayList<>();
         empresa.obtenerCatalogoServicios(catalogoActual);
 

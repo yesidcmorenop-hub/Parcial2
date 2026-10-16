@@ -8,6 +8,12 @@ public class Cliente {
     private String correoElectronico;
     private ArrayList<Solicitud> solicitud;
 
+    /**
+     * constructor del cliente
+     * @param nombre
+     * @param cedula
+     * @param correoElectronico
+     */
     public Cliente(String nombre, int cedula, String correoElectronico) {
         this.nombre = nombre;
         this.cedula = cedula;

@@ -17,14 +17,21 @@ import java.util.ResourceBundle;
 
 public class MenuPrincipalViewController implements Initializable {
 
-    // Etiqueta opcional en tu FXML para mostrar el título de la empresa
     @FXML private Label lblTituloEmpresa;
-
     private MenuPrincipalController menuPrincipalController;
 
+    /**
+     * metodo que inicia los procesos
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Inicializamos el controlador de negocio con el Singleton de la empresa
         this.menuPrincipalController = new MenuPrincipalController(Empresa.getInstance());
 
         if (lblTituloEmpresa != null) {
@@ -32,20 +39,37 @@ public class MenuPrincipalViewController implements Initializable {
         }
     }
 
+    /**
+     * metodo para abrir la gestion de servicios
+     * @param event
+     */
     @FXML
     private void handleGestionServicios(ActionEvent event) {
         abrirVentana("servicios-view.fxml", "Gestión y Personalización de Servicios");
     }
 
+    /**
+     * metodo para abrir la gestion de paquetes
+     * @param event
+     */
     @FXML
     private void handlePaquetesTecnologicos(ActionEvent event) {
         abrirVentana("paquetes-view.fxml", "Configuración de Paquetes Tecnológicos");
     }
 
+    /**
+     * metodo para abrir la gestion de solicitudes
+     * @param event
+     */
     @FXML
     private void handleRegistroSolicitudes(ActionEvent event) {
         abrirVentana("solicitudes-view.fxml", "Registro de Solicitudes de Servicios");
     }
+
+    /**
+     * metodo para abrir la gestion de tecnicos
+     * @param event
+     */
 
     @FXML
     private void handleConsultaTecnicos(ActionEvent event) {
@@ -53,7 +77,7 @@ public class MenuPrincipalViewController implements Initializable {
     }
 
     /**
-     * Método para abrir las ventanas FXML secundarias
+     * Método para abrir ventanas
      */
     private void abrirVentana(String fxmlFile, String titulo) {
         try {

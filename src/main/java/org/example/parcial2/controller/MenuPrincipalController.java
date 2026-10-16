@@ -6,6 +6,10 @@ public class MenuPrincipalController {
 
     private final Empresa empresa;
 
+    /**
+     * crea la empresa
+     * @param empresa
+     */
     public MenuPrincipalController(Empresa empresa) {
         this.empresa = empresa;
     }

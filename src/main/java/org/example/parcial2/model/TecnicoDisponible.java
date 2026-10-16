@@ -5,6 +5,12 @@ public class TecnicoDisponible {
     private boolean disponibilidad;
     private double costoDesplazamiento;
 
+    /**
+     * metodo constructor del tecnico disponible
+     * @param idTecnico de tecnico
+     * @param disponibilidad de tecnico
+     * @param costoDesplazamiento de tecnico
+     */
     public TecnicoDisponible(String idTecnico, boolean disponibilidad, double costoDesplazamiento) {
         this.idTecnico = idTecnico;
         this.disponibilidad = disponibilidad;

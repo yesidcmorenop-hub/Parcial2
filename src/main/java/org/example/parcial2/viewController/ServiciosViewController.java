@@ -49,6 +49,17 @@ public class ServiciosViewController implements Initializable {
     @FXML private Button btnGuardarPersonalizacion;
     @FXML private Button btnVolver;
 
+
+    /**
+     * metodo que inicia los procesos
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.servicioController = new ServicioController(Empresa.getInstance());
@@ -88,12 +99,18 @@ public class ServiciosViewController implements Initializable {
         });
     }
 
+    /**
+     * actualiza la tabla
+     */
     private void actualizarTabla() {
         listaServicios.clear();
         listaServicios.addAll(servicioController.obtenerCatalogoServicios());
         tableServicios.setItems(listaServicios);
     }
 
+    /**
+     * permite calcular el costo del total
+     */
     private void recalcularCostosUI() {
         if (servicioSeleccionado == null) return;
 
@@ -114,6 +131,10 @@ public class ServiciosViewController implements Initializable {
         lblCostoFinal.setText("$" + total);
     }
 
+    /**
+     * permite crear el servicio
+     * @param event
+     */
     @FXML
     private void handleCrearServicio(ActionEvent event) {
         try {
@@ -137,6 +158,10 @@ public class ServiciosViewController implements Initializable {
         }
     }
 
+    /**
+     * permite añadirle al servicio los complementos
+     * @param event
+     */
     @FXML
     private void handleAplicarComplementos(ActionEvent event) {
         if (servicioSeleccionado != null) {
@@ -151,8 +176,6 @@ public class ServiciosViewController implements Initializable {
             actualizarTabla();
 
             mostrarInformacion("¡Servicio personalizado creado con éxito! Costo final: $" + servicioDecorado.calcularCosto() + ". Ya está disponible en el registro de solicitudes.");
-
-            // Limpiar selección de complementos y mantener la ventana abierta
             chkAtencionPrioritaria.setSelected(false);
             chkSoporte30Dias.setSelected(false);
             chkAtencionDomicilio.setSelected(false);
@@ -161,6 +184,9 @@ public class ServiciosViewController implements Initializable {
         }
     }
 
+    /**
+     * elimina los espacios seleccionados
+     */
     private void limpiarFormulario() {
         txtCodigo.clear();
         if (txtNombre != null) txtNombre.clear();
@@ -168,11 +194,18 @@ public class ServiciosViewController implements Initializable {
         cmbTipoServicio.getSelectionModel().clearSelection();
     }
 
+    /**
+     * permite cerrar la ventana y volver al menu
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) btnVolver.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * muestra los mensajes despues de hacer algo
+     * @param mensaje
+     */
     private void mostrarInformacion(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("TechSolutions");
@@ -181,6 +214,10 @@ public class ServiciosViewController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * mustra los errores
+     * @param mensaje
+     */
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("TechSolutions");
