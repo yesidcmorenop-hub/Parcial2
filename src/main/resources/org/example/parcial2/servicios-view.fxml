@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.parcial2.viewController.ServiciosViewController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <HBox prefHeight="30.0" prefWidth="339.0">
+      <children>
+      
+          <!-- Botón para volver al menú principal -->
+          <Button fx:id="btnVolver" mnemonicParsing="false" text="&lt;- Regresar">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+      
+          <!-- Título de la vista -->
+          <Label text="            Gestión y Personalización de Servicios Tecnológicos">
+              <font>
+                  <Font name="System Bold" size="18.0" />
+              </font>
+          </Label>
+      </children>
+   </HBox>
+
+    <HBox spacing="20.0">
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <Label text="Catálogo de Servicios Creados:">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Label>
+
+            <TableView fx:id="tableServicios" prefHeight="200.0" prefWidth="400.0">
+                <columns>
+                    <TableColumn fx:id="colCodigo" prefWidth="68.0" text="Código" />
+                    <TableColumn fx:id="colNombre" prefWidth="93.60003662109375" text="Nombre" />
+                    <TableColumn fx:id="colCostoBase" prefWidth="87.99993896484375" text="Costo Base" />
+                    <TableColumn fx:id="colTipo" prefWidth="150.4000244140625" text="Tipo" />
+                </columns>
+            </TableView>
+
+            <VBox spacing="8.0" style="-fx-border-color: #cccccc; -fx-padding: 10; -fx-background-color: #fdfdfd;">
+                <Label text="Crear Servicio:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <HBox spacing="10.0">
+                    <Label text="Tipo de Servicio:" />
+                    <ComboBox fx:id="cmbTipoServicio" prefWidth="220.0" promptText="Seleccione tipo..." />
+                </HBox>
+                <HBox spacing="10.0">
+                    <TextField fx:id="txtCodigo" promptText="codgio" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnCrearServicio" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-base: #2175F1;" text="Crear Servicio" />
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <VBox prefWidth="300.0" spacing="12.0">
+            <Label text="Personalizar Servicio Seleccionado:">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Label>
+
+            <CheckBox fx:id="chkAtencionPrioritaria" mnemonicParsing="false" text="Atención Prioritaria: $35.000" />
+            <CheckBox fx:id="chkSoporte30Dias" mnemonicParsing="false" text="Soporte Técnico 30 días: $50.000" />
+            <CheckBox fx:id="chkAtencionDomicilio" mnemonicParsing="false" text="Atención a Domicilio: $25.000" />
+
+            <VBox spacing="5.0" style="-fx-border-color: #cccccc; -fx-padding: 10; -fx-background-color: #f9f9f9;">
+                <Label text="Resumen de Costos:" />
+                <Label fx:id="lblCostoBase" text="Costo Base: $0" />
+                <Label fx:id="lblIncrementos" text="Incrementos: $0" />
+                <Label fx:id="lblCostoFinal" text="Costo Final: $0">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+            </VBox>
+
+            <Button fx:id="btnGuardarPersonalizacion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-weight: bold; -fx-base: #2175F1;" text="Aplicar Complementos" />
+        </VBox>
+    </HBox>
+
+</VBox>

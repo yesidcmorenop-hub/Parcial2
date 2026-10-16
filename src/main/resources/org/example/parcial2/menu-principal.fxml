@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.parcial2.viewController.MenuPrincipalViewController">
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+
+    <!-- Título Principal -->
+    <Label text="TechSolutions">
+        <font>
+            <Font name="System Bold" size="22.0" />
+        </font>
+    </Label>
+
+    <Label text="Seleccione una opción para continuar:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+
+    <!-- Botones de navegación para las 4 funcionalidades -->
+    <Button fx:id="btnGestionServicios" mnemonicParsing="false" onAction="#handleGestionServicios" prefWidth="300.0" style="-fx-base: #2175F1; -fx-font-weight: bold;" text="Gestión y Personalización de Servicios">
+      <font>
+         <Font size="14.0" />
+      </font></Button>
+
+    <Button fx:id="btnPaquetesTecnologicos" mnemonicParsing="false" onAction="#handlePaquetesTecnologicos" prefWidth="300.0" style="-fx-base: #2175F1; -fx-font-weight: bold;" text="Configuración de Paquetes Tecnológicos">
+      <font>
+         <Font size="14.0" />
+      </font></Button>
+
+    <Button fx:id="btnRegistroSolicitudes" mnemonicParsing="false" onAction="#handleRegistroSolicitudes" prefWidth="300.0" style="-fx-base: #2175F1; -fx-font-weight: bold;" text="Registro de Solicitudes de Servicios">
+      <font>
+         <Font size="14.0" />
+      </font></Button>
+
+    <Button fx:id="btnConsultaTecnicos" mnemonicParsing="false" onAction="#handleConsultaTecnicos" prefWidth="300.0" style="-fx-base: #2175F1; -fx-font-weight: bold;" text="Consulta de Técnicos y Costos">
+      <font>
+         <Font size="14.0" />
+      </font></Button>
+
+</VBox>
