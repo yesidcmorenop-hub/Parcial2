@@ -8,6 +8,6 @@ public class AtencionPrioritaria extends DecoradorServicio{
 
     @Override
     public double calcularCosto() {
-        return super.calcularCosto() + 3500.0;
+        return super.calcularCosto() + 35000.0;
     }
 }

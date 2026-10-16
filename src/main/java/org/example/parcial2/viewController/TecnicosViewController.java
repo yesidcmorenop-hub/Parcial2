@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.parcial2.controller.TecnicoController;
+import org.example.parcial2.model.Empresa;
+import org.example.parcial2.model.Especialidad;
+import org.example.parcial2.model.TecnicoDisponible;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +16,7 @@ import java.util.ResourceBundle;
 public class TecnicosViewController implements Initializable {
 
     @FXML private Button btnVolver;
-    @FXML private ComboBox<String> cmbEspecialidad;
+    @FXML private ComboBox<Especialidad> cmbEspecialidad;
     @FXML private Button btnConsultarTecnico;
     @FXML private TextArea txtRespuestaLegacy;
 
@@ -22,14 +26,15 @@ public class TecnicosViewController implements Initializable {
     @FXML private Label lblEstadoConfirmacion;
     @FXML private Button btnVerificarYConfirmar;
 
+    private TecnicoController tecnicoController;
+    private TecnicoDisponible tecnicoActual;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cmbEspecialidad.getItems().addAll(
-                "Mantenimiento General",
-                "Redes y Conectividad",
-                "Recuperación de Datos",
-                "Soporte de Software"
-        );
+        this.tecnicoController = new TecnicoController(Empresa.getInstance());
+
+        // Cargamos las especialidades definidas en el modelo
+        cmbEspecialidad.getItems().setAll(Especialidad.values());
 
         btnVolver.setOnAction(event -> cerrarVentana());
         btnConsultarTecnico.setOnAction(this::handleConsultarLegacy);
@@ -38,27 +43,37 @@ public class TecnicosViewController implements Initializable {
 
     @FXML
     private void handleConsultarLegacy(ActionEvent event) {
-        String especialidadSeleccionada = cmbEspecialidad.getValue();
+        Especialidad especialidadSeleccionada = cmbEspecialidad.getValue();
 
-        if (especialidadSeleccionada == null || especialidadSeleccionada.isEmpty()) {
+        if (especialidadSeleccionada == null) {
             txtRespuestaLegacy.setText("Por favor, seleccione una especialidad primero.");
             return;
         }
 
-        System.out.println("Consultando sistema externo para: " + especialidadSeleccionada);
+        // Consultamos a través del controlador de negocio (Adapter integrado)
+        tecnicoActual = tecnicoController.consultarDisponibilidadTecnico(especialidadSeleccionada);
 
-        String respuestaCrudaSimulada = "TEC-402|DISPONIBLE|35000";
-        txtRespuestaLegacy.setText(respuestaCrudaSimulada);
+        if (tecnicoActual != null) {
+            txtRespuestaLegacy.setText("Respuesta traducida por el Adaptador:\n" +
+                    "ID Técnico: " + tecnicoActual.getIdTecnico() + "\n" +
+                    "Disponible: " + tecnicoActual.isDisponibilidad() + "\n" +
+                    "Costo Desplazamiento: $" + tecnicoActual.getCostoDesplazamiento());
 
-        lblIdTecnico.setText("ID Técnico: TEC-402");
-        lblDisponibilidad.setText("Disponibilidad: DISPONIBLE");
-        lblCostoDesplazamiento.setText("Costo Desplazamiento: $35.000");
+            lblIdTecnico.setText("ID Técnico: " + tecnicoActual.getIdTecnico());
+            lblDisponibilidad.setText("Disponibilidad: " + (tecnicoActual.isDisponibilidad() ? "DISPONIBLE" : "NO_DISPONIBLE"));
+            lblCostoDesplazamiento.setText("Costo Desplazamiento: $" + tecnicoActual.getCostoDesplazamiento());
+        } else {
+            txtRespuestaLegacy.setText("No se obtuvo respuesta del sistema externo.");
+        }
     }
 
     @FXML
     private void handleVerificarYConfirmar(ActionEvent event) {
-        System.out.println("Verificando y confirmando solicitud con técnico adaptado...");
-        lblEstadoConfirmacion.setText("Estado: ¡Técnico verificado y asignado con éxito a la solicitud!");
+        if (tecnicoActual != null && tecnicoActual.isDisponibilidad()) {
+            lblEstadoConfirmacion.setText("Estado: ¡Técnico verificado y asignado con éxito a la solicitud!");
+        } else {
+            lblEstadoConfirmacion.setText("Estado: Atención presencial no confirmada (Sin técnico disponible).");
+        }
     }
 
     private void cerrarVentana() {

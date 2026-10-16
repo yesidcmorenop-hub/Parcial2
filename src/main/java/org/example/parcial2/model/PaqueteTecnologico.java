@@ -9,8 +9,32 @@ public class PaqueteTecnologico extends ServicioTecnologico{
         super(codigo, nombre, descripcion, costoBase, especialidad);
         this.listServicioTecnologico = new ArrayList<>();
     }
-    public void agregarServicio(ServicioTecnologico servicio) {
+    public boolean agregarServicio(ServicioTecnologico servicio) {
+        if (this.equals(servicio)) {
+            return false;
+        }
+        if (servicio instanceof PaqueteTecnologico) {
+            if (((PaqueteTecnologico) servicio).contienePaquete(this)) {
+                return false;
+            }
+        }
+
         this.listServicioTecnologico.add(servicio);
+        return true;
+    }
+
+    public boolean contienePaquete(PaqueteTecnologico paqueteBuscado) {
+        for (ServicioTecnologico servicio : this.listServicioTecnologico) {
+            if (servicio.equals(paqueteBuscado)) {
+                return true;
+            }
+            if (servicio instanceof PaqueteTecnologico) {
+                if (((PaqueteTecnologico) servicio).contienePaquete(paqueteBuscado)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void eliminarServicio(ServicioTecnologico servicio) {

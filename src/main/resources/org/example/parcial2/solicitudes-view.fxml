@@ -17,8 +17,8 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Pane prefHeight="44.0" prefWidth="588.0">
-      <children>
+    <Pane prefHeight="44.0" prefWidth="588.0">
+        <children>
             <Button fx:id="btnVolver" layoutY="-3.0" mnemonicParsing="false" text="&lt;Regresar">
                 <font>
                     <Font name="System Bold" size="12.0" />
@@ -29,28 +29,35 @@
                     <Font name="System Bold" size="18.0" />
                 </font>
             </Label>
-      </children>
-   </Pane>
+        </children>
+    </Pane>
 
     <HBox spacing="20.0">
-        <VBox spacing="12.0" HBox.hgrow="ALWAYS">
-            <HBox spacing="10.0">
-                <TextField fx:id="txtCodigoSolicitud" promptText="Código Solicitud (Obligatorio)" HBox.hgrow="ALWAYS" />
-            </HBox>
+        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <TextField fx:id="txtCodigoSolicitud" promptText="Código Solicitud (Obligatorio)" />
 
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                 <Label text="Cliente:" />
                 <ComboBox fx:id="cmbClientes" prefWidth="250.0" promptText="Seleccione cliente" />
             </HBox>
 
-            <Label text="Seleccionar Servicios o Paquetes a Contratar:">
+            <Label text="Elementos Disponibles (Catálogo):">
                 <font>
                     <Font name="System Bold" size="12.0" />
                 </font>
             </Label>
-            <ListView fx:id="listElementosDisponibles" prefHeight="150.0" />
+            <ListView fx:id="listElementosDisponibles" prefHeight="110.0" />
 
-            <Button fx:id="btnAgregarElementoSolicitud" mnemonicParsing="false" text="Agregar a la Solicitud" />
+            <Button fx:id="btnAgregarElementoSolicitud" mnemonicParsing="false" text="⬇️ Agregar a la Solicitud" />
+
+            <Label text="Elementos Seleccionados para la Solicitud:">
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font>
+            </Label>
+            <ListView fx:id="listElementosSeleccionados" prefHeight="110.0" />
+
+            <Button fx:id="btnQuitarElementoSolicitud" mnemonicParsing="false" text="⬆️ Quitar de la Solicitud" />
         </VBox>
 
         <VBox prefWidth="300.0" spacing="10.0">

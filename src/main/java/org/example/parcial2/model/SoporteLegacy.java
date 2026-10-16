@@ -1,6 +1,7 @@
 package org.example.parcial2.model;
 
 public class SoporteLegacy {
+
     /**
      * Metodo que recibe el codigoEspecialidad y retorna un String
      */
@@ -14,7 +15,11 @@ public class SoporteLegacy {
                 if (codigoEspecialidad == 103) {
                     return "TEC-234|DISPONIBLE|35000";
                 } else {
-                    return "SIN_TECNICO|NO_DISPONIBLE|0";
+                    if (codigoEspecialidad == 104) {
+                        return "TEC-310|DISPONIBLE|40000";
+                    } else {
+                        return "SIN_TECNICO|NO_DISPONIBLE|0";
+                    }
                 }
             }
         }

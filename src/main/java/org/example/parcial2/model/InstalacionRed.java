@@ -11,8 +11,4 @@ public class InstalacionRed extends ServicioTecnologico{
         return this.costoBase;
     }
 
-    @Override
-    public double calcularCosto() {
-        return getCostoBase();
-    }
 }
